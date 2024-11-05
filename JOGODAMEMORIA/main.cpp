@@ -6,7 +6,7 @@ using namespace std;
 
 const int linha = 4, coluna = 4, pares = (linha * coluna)/2;
 
-int auxiliarPares = pares, linhaAle, colunaAle, pontuacao = 0, x1, x2, y1, y2;
+int auxiliarPares = pares, linhaAle, colunaAle, pontuacao = 0, x1, y1, x2, y2;
 char TABGAB[linha][coluna], TABSEC[linha][coluna], letra = 65;
 
 void inicializarTabuleiros() {
@@ -83,7 +83,7 @@ void jogo() {
         TABSEC[x1][y1] = TABGAB[x1][y1];
 
         imprimirTabela();
-
+        
         do {
             cout << endl << "Selecione a segunda carta, digite a linha e coluna: ";
             cin >> x2 >> y2;
