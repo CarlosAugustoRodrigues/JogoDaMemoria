@@ -33,11 +33,8 @@ void preencherTabuleiros() {
     }
 }
 
-void jogo() {
-    while (pontuacao < pares) {
-        cout << endl << "Pontuacao: " << pontuacao << endl << endl;
-
-        cout << "  ";
+void imprimirTabela() {
+     cout << "  ";
         for (int i = 0; i < coluna; i++) {
             cout << i << " ";
         }
@@ -50,6 +47,13 @@ void jogo() {
             }
             cout << endl;
         }
+}
+
+void jogo() {
+    while (pontuacao < pares) {
+        cout << endl << "Pontuacao: " << pontuacao << endl << endl;
+        
+        imprimirTabela();
 
         do {
             cout << endl << "Selecione a primeira carta, digite a linha e coluna: ";
@@ -63,20 +67,8 @@ void jogo() {
         } while (TABSEC[x1][y1] != '*');
 
         TABSEC[x1][y1] = TABGAB[x1][y1];
-
-        cout << "  ";
-        for (int j = 0; j < coluna; j++) {
-            cout << j << " ";
-        }
-        cout << endl;
-
-        for (int i = 0; i < linha; i++) {
-            cout << i << " ";
-            for (int j = 0; j < coluna; j++) {
-                cout << TABSEC[i][j] << " ";
-            }
-            cout << endl;
-        }
+        
+        imprimirTabela();
 
         do {
             cout << endl << "Selecione a segunda carta, digite a linha e coluna: ";
@@ -89,28 +81,17 @@ void jogo() {
         } while (TABSEC[x2][y2] != '*');
 
         TABSEC[x2][y2] = TABGAB[x2][y2];
-
-        cout << "  ";
-        for (int j = 0; j < coluna; j++) {
-            cout << j << " ";
-        }
-        cout << endl;
-
-        for (int i = 0; i < linha; i++) {
-            cout << i << " ";
-            for (int j = 0; j < coluna; j++) {
-                cout << TABSEC[i][j] << " ";
-            }
-            cout << endl;
-        }
+        
+        imprimirTabela();
 
         if (TABSEC[x1][y1] != TABSEC[x2][y2]) {
             cout << endl << "Cartas diferentes, tente novamente!" << endl;
             TABSEC[x1][y1] = '*';
             TABSEC[x2][y2] = '*';
         } else {
-            cout << endl << "Parabens, voce encontrou 1 par de cartas" << endl;
             pontuacao++;
+            cout << endl << "Parabens, voce encontrou " << pontuacao << " par de cartas" << endl;
+            
         }
     }
 
