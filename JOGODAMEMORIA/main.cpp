@@ -1,14 +1,14 @@
 #include <iostream>
-#include <thread>
 #include <iomanip>
 #include <stdlib.h>
 #include <time.h>
-#include <chrono>
+#include <windows.h>
+#include <locale.h>
 
 
 using namespace std;
 
-const int linha = 4, coluna = 5, pares = (linha * coluna)/2, delayTime = 7;
+const int linha = 4, coluna = 13, pares = (linha * coluna)/2, delayTime = 3;
 
 int auxiliarPares = pares, linhaAle, colunaAle, pontuacao = 0, x1, y1, x2, y2, auxDelayTime;
 char TABGAB[linha][coluna], TABSEC[linha][coluna], letra = 65;
@@ -55,7 +55,7 @@ void imprimirTabela() {
 
 bool validarEntrada(int x, int y) {
     if (x < 0 || x > (linha - 1) || y < 0 || y > (coluna - 1) || TABSEC[x][y] != '*') {
-        cout << "Coordenadas invÃ¡lidas ou carta jÃ¡ revelada! Tente novamente" << endl;
+        cout << "Coordenadas inválidas ou carta já revelada! Tente novamente" << endl;
         return false;
     }
     return true;
@@ -67,15 +67,16 @@ bool verificarCartas(char carta1, char carta2) {
         cout << endl << "Cartas diferentes, tente novamente!" << endl;
         auxDelayTime = delayTime;
         while(auxDelayTime >= 0){
-            this_thread::sleep_for(std::chrono::seconds(1));
-            cout << "\rVoce tem " << auxDelayTime << " segundos para memorizar o tabuleiro!";
+            Sleep(1000);
+            cout << "\rVocê tem " << auxDelayTime << " segundos para memorizar o tabuleiro!";
             cout.flush();
             auxDelayTime--;
         }
+        system("cls");
         return false;
     } else {
         pontuacao++;
-        cout << endl << "ParabÃ©ns, vocÃª encontrou " << pontuacao << " par(es) de cartas" << endl;
+        cout << endl << "Parabéns, você encontrou " << pontuacao << " par(es) de cartas" << endl;
         return true;
     }
 }
@@ -83,7 +84,7 @@ bool verificarCartas(char carta1, char carta2) {
 
 void jogo() {
     while (pontuacao < pares) {
-        cout << endl << "PontuaÃ§Ã£o: " << pontuacao << endl << endl;
+        cout << endl << "Pontuação: " << pontuacao << endl << endl;
         
         imprimirTabela();
 
@@ -113,14 +114,16 @@ void jogo() {
         }
     }
 
-    cout << endl << "ParabÃ©ns, vocÃª encontrou todos os pares!" << endl;                
+    cout << endl << "Parabéns, você encontrou todos os pares!" << endl;                
 }
 
 
 int main() {
 	
+	setlocale(LC_ALL, "");
+	
 	cout << "***************" << endl;
-	cout << "JOGO DA MEMÃ“RIA" << endl;
+	cout << "JOGO DA MEMÓRIA" << endl;
 	cout << "***************" << endl;
     
     inicializarTabuleiros();
