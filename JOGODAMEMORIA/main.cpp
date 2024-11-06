@@ -8,7 +8,7 @@
 
 using namespace std;
 
-const int linha = 4, coluna = 13, pares = (linha * coluna)/2, delayTime = 3;
+const int linha = 2, coluna = 2, pares = (linha * coluna)/2, delayTime = 2;
 
 int auxiliarPares = pares, linhaAle, colunaAle, pontuacao = 0, x1, y1, x2, y2, auxDelayTime;
 char TABGAB[linha][coluna], TABSEC[linha][coluna], letra = 65;
@@ -68,7 +68,7 @@ bool verificarCartas(char carta1, char carta2) {
         auxDelayTime = delayTime;
         while(auxDelayTime >= 0){
             Sleep(1000);
-            cout << "\rVocê tem " << auxDelayTime << " segundos para memorizar o tabuleiro!";
+            cout << "\rVocêª tem " << auxDelayTime << " segundos para memorizar o tabuleiro!";
             cout.flush();
             auxDelayTime--;
         }
@@ -77,6 +77,8 @@ bool verificarCartas(char carta1, char carta2) {
     } else {
         pontuacao++;
         cout << endl << "Parabéns, você encontrou " << pontuacao << " par(es) de cartas" << endl;
+        Sleep(2500);
+        system("cls");
         return true;
     }
 }
