@@ -1,12 +1,16 @@
 #include <iostream>
+#include <thread>
+#include <iomanip>
 #include <stdlib.h>
 #include <time.h>
+#include <chrono>
+
 
 using namespace std;
 
-const int linha = 4, coluna = 4, pares = (linha * coluna)/2;
+const int linha = 4, coluna = 5, pares = (linha * coluna)/2, delayTime = 7;
 
-int auxiliarPares = pares, linhaAle, colunaAle, pontuacao = 0, x1, y1, x2, y2;
+int auxiliarPares = pares, linhaAle, colunaAle, pontuacao = 0, x1, y1, x2, y2, auxDelayTime;
 char TABGAB[linha][coluna], TABSEC[linha][coluna], letra = 65;
 
 void inicializarTabuleiros() {
@@ -36,14 +40,14 @@ void inicializarTabuleiros() {
 void imprimirTabela() {
     cout << "  ";
     for (int i = 0; i < coluna; i++) {
-        cout << i << " ";
+        cout << setw(4) << i;
     }
     cout << endl;
 
     for (int i = 0; i < linha; i++) {
-        cout << i << " ";
+        cout << setw(2) << right << i;
         for (int j = 0; j < coluna; j++) {
-            cout << TABSEC[i][j] << " ";
+            cout << setw(4) <<TABSEC[i][j];
         }
         cout << endl;
     }
@@ -57,9 +61,17 @@ bool validarEntrada(int x, int y) {
     return true;
 }
 
+
 bool verificarCartas(char carta1, char carta2) {
     if (carta1 != carta2) {
         cout << endl << "Cartas diferentes, tente novamente!" << endl;
+        auxDelayTime = delayTime;
+        while(auxDelayTime >= 0){
+            this_thread::sleep_for(std::chrono::seconds(1));
+            cout << "\rVoce tem " << auxDelayTime << " segundos para memorizar o tabuleiro!";
+            cout.flush();
+            auxDelayTime--;
+        }
         return false;
     } else {
         pontuacao++;
@@ -67,6 +79,7 @@ bool verificarCartas(char carta1, char carta2) {
         return true;
     }
 }
+
 
 void jogo() {
     while (pontuacao < pares) {
